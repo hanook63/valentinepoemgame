@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compose Your Own Love Poem</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #ffe6e6;
+        }
+        .container {
+            margin-top: 50px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+        .word-selection {
+            margin: 20px 0;
+        }
+        .word-btn {
+            padding: 10px;
+            margin: 5px;
+            border: none;
+            background: #ff6699;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .poem {
+            margin-top: 20px;
+            font-size: 18px;
+            font-style: italic;
+        }
+        .hidden {
+            display: none;
+        }
+        .final-message {
+            font-size: 22px;
+            font-weight: bold;
+            color: #ff3366;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <audio id="bg-music" loop>
+        <source src="husn_piano.mp3" type="audio/mp3">
+    </audio>
+    <button onclick="playMusic()">Play Music</button>
+    <div class="container">
+        <h2>Compose Your Own Love Poem</h2>
+        <p>Select words to create a unique poem:</p>
+        <div class="word-selection">
+            <button class="word-btn" onclick="selectWord('moonlight')">Moonlight</button>
+            <button class="word-btn" onclick="selectWord('whisper')">Whisper</button>
+            <button class="word-btn" onclick="selectWord('forever')">Forever</button>
+            <button class="word-btn" onclick="selectWord('dream')">Dream</button>
+            <button class="word-btn" onclick="selectWord('heart')">Heart</button>
+        </div>
+        <button onclick="generatePoem()">Generate Poem</button>
+        <p class="poem hidden" id="poem"></p>
+        <p class="final-message hidden" id="final-message">Will you be my Valentine, Samvritha? ❤️</p>
+    </div>
+    
+    <script>
+        let words = [];
+        function selectWord(word) {
+            words.push(word);
+        }
+        function generatePoem() {
+            if (words.length === 0) {
+                alert('Please select at least one word!');
+                return;
+            }
+            let poem = `Samvritha, in the ${words[0] || 'moonlight'} glow,<br> A ${words[1] || 'soft whisper'} only we know.<br> With love so deep, forever it stays,<br> A ${words[2] || 'dream'} of you in endless ways.`;
+            document.getElementById('poem').innerHTML = poem;
+            document.getElementById('poem').classList.remove('hidden');
+            setTimeout(() => {
+                document.getElementById('final-message').classList.remove('hidden');
+            }, 2000);
+        }
+        function playMusic() {
+            document.getElementById('bg-music').play();
+        }
+    </script>
+</body>
+</html>
